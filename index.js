@@ -1,5 +1,5 @@
 const axios = require("axios")
-const info = new Map();
+var info = []
 var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
 
 const main = {
@@ -20,49 +20,50 @@ const main = {
         })
    */
     "get": function request(callback) {
-
+        info = []
         if (this.url == "undefined")
             return console.log("No URL Provided");
 
         if (this.key == "undefined")
             return console.log("API Key is Invalid");
-        
-        
+
+   
         var _id = this.url.match(regExp);
 
         if (_id && _id[7].length == 11) {
 
             var request_url = `https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet,statistics,contentDetails,status&id=${_id[7]}&key=${this.key}`;
-            
-          
+
             axios.get(request_url).then(response => {
                 let promise = new Promise(function (resolve, reject) {
-                    //Video Title
-                    info.set("title", response.data.items[0].snippet.title)
-                    //Video's Author
-                    info.set("channel", response.data.items[0].snippet.channelTitle)
-                    //Video Description
-                    info.set("description", response.data.items[0].snippet.description)
-                    //Video Duration
-                    info.set("duration", resolveDuration(response.data.items[0].contentDetails.duration))
-                    //Video's View Count
-                    info.set("views", response.data.items[0].statistics.viewCount)
-                    //Video's Likes
-                    info.set("likes", response.data.items[0].statistics.likeCount)
-                     //Video's Comment Count
-                    info.set("comments", response.data.items[0].statistics.commentCount)
 
-                    resolve(info)
+                    var duration = resolveDuration(response.data.items[0].contentDetails.duration)
+                    info.push({
+                        "title": response.data.items[0].snippet.title,
+                        "channel": response.data.items[0].snippet.channelTitle,
+                        "description": response.data.items[0].snippet.description,
+                        "duration": duration,
+                        "views": response.data.items[0].statistics.viewCount,
+                        "likes": response.data.items[0].statistics.likeCount,
+                        "comments": response.data.items[0].statistics.commentCount,
+                        "thumbnail": response.data.items[0].snippet.thumbnails.maxres.url
+
+                    })
+
+
+                    resolve(info[0])
+                   
 
                 });
                 promise.then(result => {
                     callback(result)
+                
                 });
 
             });
         }
         else {
-         console.log("The URL doesn't match with format")
+            console.log("The URL doesn't match with format")
         }
     }
 }
@@ -77,9 +78,9 @@ function resolveDuration(duration) {
         return (days * 24 * 3600 * 1000) + (hours * 3600 * 1000) + (minutes * 60 * 1000) + (seconds * 1000);
     }
     return 0;
- }
+}
 module.exports = main;
-  
+
 
 
 
