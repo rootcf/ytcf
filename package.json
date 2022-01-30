@@ -1,6 +1,6 @@
 {
   "name": "ytcf",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Very simple and dumbest way to use YouTube Data API V3",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "#"
+    "url": "git+https://github.com/rootcf/ytcf.git"
   },
   "keywords": [
     "rootcf",
@@ -22,5 +22,10 @@
   "dependencies": {
     "axios": "^0.25.0"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rootcf/ytcf/issues"
+  },
+  "homepage": "https://github.com/rootcf/ytcf#readme"
 }
+
