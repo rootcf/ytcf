@@ -4,6 +4,12 @@ Very simple way to use YouTube Data API V3,
 It's not finished yet all. But you can use it.
 
 # Usage
+
+**Install**
+```js
+npm install ytcf 
+```
+**Use**
 ```js
 const ytcf = require("ytcf")
 
