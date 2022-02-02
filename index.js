@@ -51,7 +51,7 @@ const main = {
                     })
 
 
-                    resolve(info[0])
+                    resolve(info[0]);
                    
 
                 });
@@ -63,7 +63,7 @@ const main = {
             });
         }
         else {
-            console.warn("The URL doesn't match with format")
+            console.warn("The URL doesn't match with format");
         }
     }
 };
