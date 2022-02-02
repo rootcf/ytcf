@@ -22,10 +22,10 @@ const main = {
     "get": function request(callback) {
         info = [];
         if (this.url === "undefined")
-            return Console.error("No URL Provided");
+            return console.error("No URL Provided");
 
         if (this.key === "undefined")
-            return Console.error("API Key is Invalid");
+            return console.error("API Key is Invalid");
 
    
         var _id = this.url.match(regExp);
@@ -63,7 +63,7 @@ const main = {
             });
         }
         else {
-            Console.warn("The URL doesn't match with format")
+            console.warn("The URL doesn't match with format")
         }
     }
 };
