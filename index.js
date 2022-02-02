@@ -1,5 +1,5 @@
 const axios = require("axios")
-var info = []
+var info = [];
 var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
 
 const main = {
@@ -20,21 +20,21 @@ const main = {
         })
    */
     "get": function request(callback) {
-        info = []
-        if (this.url == "undefined")
-            return console.log("No URL Provided");
+        info = [];
+        if (this.url === "undefined")
+            return console.error("No URL Provided");
 
-        if (this.key == "undefined")
-            return console.log("API Key is Invalid");
+        if (this.key === "undefined")
+            return console.error("API Key is Invalid");
 
    
         var _id = this.url.match(regExp);
 
-        if (_id && _id[7].length == 11) {
+        if (_id && _id[7].length === 11) {
 
             var request_url = `https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet,statistics,contentDetails,status&id=${_id[7]}&key=${this.key}`;
 
-            axios.get(request_url).then(response => {
+            axios.get(request_url).then((response) => {
                 let promise = new Promise(function (resolve, reject) {
 
                     var duration = resolveDuration(response.data.items[0].contentDetails.duration)
@@ -56,7 +56,7 @@ const main = {
 
                 });
                 promise.then(result => {
-                    callback(result)
+                    callback(result);
                 
                 });
 
@@ -66,7 +66,7 @@ const main = {
             console.log("The URL doesn't match with format")
         }
     }
-}
+};
 function resolveDuration(duration) {
     const time_extractor = /^P([0-9]*D)?T([0-9]*H)?([0-9]*M)?([0-9]*S)?$/i;
     const extracted = time_extractor.exec(duration);
