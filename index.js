@@ -55,7 +55,7 @@ const main = {
                    
 
                 });
-                promise.then(result => {
+                promise.then((result) => {
                     callback(result);
                 
                 });
