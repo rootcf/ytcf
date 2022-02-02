@@ -1,4 +1,4 @@
-const axios = require("axios")
+const axios = require("axios");
 var info = [];
 var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
 
@@ -22,10 +22,10 @@ const main = {
     "get": function request(callback) {
         info = [];
         if (this.url === "undefined")
-            return console.error("No URL Provided");
+            return Console.error("No URL Provided");
 
         if (this.key === "undefined")
-            return console.error("API Key is Invalid");
+            return Console.error("API Key is Invalid");
 
    
         var _id = this.url.match(regExp);
@@ -63,7 +63,7 @@ const main = {
             });
         }
         else {
-            console.log("The URL doesn't match with format")
+            Console.warn("The URL doesn't match with format")
         }
     }
 };
