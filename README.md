@@ -12,12 +12,23 @@ It's not finished yet all. But you can use it.
 npm install ytcf 
 ```
 **Use**
+
+__Get Video by Video URL__
 ```js
 const ytcf = require("ytcf")
 
-ytcf.key = "YOUR API KEY"
-ytcf.url = "YouTube Video URL"
-ytcf.get(function(video){
+ytcf.apiKey("YOUR API KEY")
+ytcf.getVideo(videoURL,function(video){
     console.log(`The video's title is ${video.title}`)
+})
+```
+
+__Get Channel Information by Channel URL__
+```js
+const ytcf = require("ytcf")
+
+ytcf.apiKey("YOUR API KEY")
+ytcf.getChannel(channelURL,function(channel){
+    console.log(`The channel's title is ${channel.title}`)
 })
 ```
