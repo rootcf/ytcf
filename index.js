@@ -1,4 +1,4 @@
-const { apiKey, getVideo , getChannel} = require("./src/core.js")
+const { apiKey, getVideo , getChannel, searchVideo} = require("./src/core.js")
 
 const main = {
     /**
@@ -23,7 +23,16 @@ const main = {
            console.log(`The channel's title is ${channel.title}`)
      })
 */
-   getChannel
+    getChannel,
+    /**
+* Search first 15 videos of specified query.
+* You need Provide your API Key to use.
+* @example
+ytcf.searchVideo(query, function(response) {
+       console.log(`First video's title is ${response[0].title}!`)
+ })
+*/
+    searchVideo
     
 }
 
