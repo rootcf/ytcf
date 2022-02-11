@@ -32,3 +32,13 @@ ytcf.getChannel(channelURL,function(channel){
     console.log(`The channel's title is ${channel.title}`)
 })
 ```
+
+__Search first 15 videos of specified query__
+```js
+const ytcf = require("ytcf")
+
+ytcf.apiKey("YOUR API KEY")
+ytcf.searchVideo(query, function(response) {
+       console.log(`First video's title is ${response[0].title}!`)
+ })
+```
