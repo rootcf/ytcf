@@ -85,6 +85,48 @@ module.exports = {
         else {
             console.log("The URL doesn't match with format")
         }
+    },
+    searchVideo: (query, callback) => {
+        info = []
+        if (!query) return 
+        if (!_key) return console.error("API Key is Invalid");
+
+
+        if (query) {
+
+            var request_url = `https://www.googleapis.com/youtube/v3/search?part=id%2C+snippet&q=${query}&key=${_key}&maxResults=15`;
+
+            axios.get(request_url).then(response => {
+                let promise = new Promise(function (resolve, reject) {
+                          
+                    response.data.items.forEach(element => {
+                        if (element.id.playlistId) return;
+                        if (element.id.channelId) return;
+                        info.push([{
+                            "id" : element.id.videoId,
+                            "title": element.snippet.title,
+                            "channel": element.snippet.channelTitle,
+                            "isLive" : element.snippet.liveBroadcastContent,
+                            "description": element.snippet.description,
+                            "createdAt": element.snippet.publishedAt,
+                            "thumbnail": element.snippet.thumbnails.high.url,
+
+                        }])
+                    });
+                    resolve(info[0])
+
+                });
+                promise.then(result => {
+                    callback(result)
+
+                });
+
+            });
+
+        }
+        else {
+            return;
+        }
     }
 }
 
