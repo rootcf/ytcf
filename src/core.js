@@ -56,8 +56,15 @@ module.exports = {
 
         if (_id) {
 
-            var request_url = `https://www.googleapis.com/youtube/v3/channels?part=id%2C+snippet,contentDetails,status,statistics&id=${_id}&key=${_key}`;
- 
+            if (_id[6] == "user")
+                var request_url = `https://www.googleapis.com/youtube/v3/channels?part=id%2C+snippet,contentDetails,status,statistics&forUsername=${_id[9]}&key=${_key}`;
+
+            else if (_id[6] == "channel") 
+                var request_url = `https://www.googleapis.com/youtube/v3/channels?part=id%2C+snippet,contentDetails,status,statistics&id=${_id[9]}&key=${_key}`;
+            
+            else 
+                return;
+            
                 axios.get(request_url).then(response => {
                     let promise = new Promise(function (resolve, reject) {
 
@@ -68,6 +75,7 @@ module.exports = {
                             "thumbnail": response.data.items[0].snippet.thumbnails.high.url,
                             "subscribers": response.data.items[0].statistics.subscriberCount,
                             "views": response.data.items[0].statistics.viewCount,
+                            "videoCount": response.data.items[0].statistics.videoCount,
                             "country": response.data.items[0].snippet.country
 
                         })
