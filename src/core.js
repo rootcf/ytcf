@@ -7,7 +7,7 @@ module.exports = {
     },
     getVideo:  function request(videoURL,callback) {
         info = []
-        if (!videoURLl)   return console.error("No URL Provided");
+        if (!videoURL)   return console.error("No URL Provided");
         if (!_key) return console.warn("API Key is Invalid");
         
         var _id = videoURL.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/);
